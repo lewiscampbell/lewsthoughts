@@ -26,6 +26,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
+    `gatsby-plugin-favicon`,
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
