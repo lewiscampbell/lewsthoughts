@@ -28,7 +28,10 @@ module.exports = {
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-source-contentful',
-      options: contentfulConfig,
+      options: {
+        contentfulConfig,
+        icon: 'images/favicon-32x32.png'
+      }
     }
   ],
 }
