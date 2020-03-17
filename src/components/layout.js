@@ -3,8 +3,6 @@ import { Link } from 'gatsby'
 import base from './base.css'
 import Container from './container'
 import Navigation from './navigation'
-import favicon from '../images/favicon-32x32.png'
-import Helmet from 'react-helmet'
 
 class Template extends React.Component {
   render() {
