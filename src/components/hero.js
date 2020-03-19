@@ -10,8 +10,5 @@ export default ({ data }) => (
       alt={data.name}
       fluid={data.heroImage.fluid}
     />
-    <div>
-      <p>Step into my thoughts.</p>
-    </div>
   </div>
 )
