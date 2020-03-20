@@ -7,10 +7,10 @@ export default () => (
     <div role="smLinks">
       <ul className={styles.navigation}>
         <li className={styles.smItem}>
-          <a href="https://www.instagram.com/lewiscampbellx/"> <img src="instagram.png" alt="instagram"/> </a>
+          <a href="https://www.instagram.com/lewiscampbellx/"> <img src="../../static/instagram.png" alt=""/> </a>
         </li>
         <li className={styles.smItem}>
-          <a href="https://twitter.com/lewiscampbellx"> <img src="twitter.png" alt="twitter"/> </a>
+          <a href="https://twitter.com/lewiscampbellx"> <img src="../../static/twitter.png" alt=""/> </a>
         </li>
       </ul>
     </div>
