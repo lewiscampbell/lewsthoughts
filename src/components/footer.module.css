@@ -1,14 +1,17 @@
 .smLinks {
   display: flex;
   justify-content: center;
+  transform: opacity(0%);
 }
 
 .smItem {
   height: 35px;
   width: 35px;
   margin: 20px;
+  opacity: 0.2;
 }
 
 .smItem:hover {
   transform: scale(1.1);
+  opacity: 0.4;
 }
