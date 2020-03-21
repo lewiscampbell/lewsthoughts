@@ -35,3 +35,7 @@ header {
 .navigationItem a {
   color: currentColor;
 }
+
+.link {
+  text-decoration: none;
+}
