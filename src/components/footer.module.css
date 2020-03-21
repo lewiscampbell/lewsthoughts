@@ -1,22 +1,14 @@
 .smLinks {
   display: flex;
   justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  height: 20vh;
-  max-height: 100px;
-  font-size: 16px;
 }
 
 .smItem {
   height: 35px;
   width: 35px;
-  display: inline-flex;
-  align-items: center;
-  margin: 0px 20px;
+  margin: 20px;
 }
 
-.smItem a {
-  color: currentColor;
+.smItem:hover {
+  transform: scale(1.1);
 }

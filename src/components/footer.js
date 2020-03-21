@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styles from './footer.module.css'
+import instagram from '../../static/instagram.png'
+import twitter from '../../static/twitter.png'
 
 export default () => (
   <footer>
-    <div role="smLinks">
-      <ul className={styles.navigation}>
-        <li className={styles.smItem}>
-          <a href="https://www.instagram.com/lewiscampbellx/"> <img src="instagram.png" alt=""/> </a>
-        </li>
-        <li className={styles.smItem}>
-          <a href="https://twitter.com/lewiscampbellx"> <img src="twitter.png" alt=""/> </a>
-        </li>
-      </ul>
+    <div className={styles.smLinks}>
+      <div className={styles.smItem}>
+        <a href="https://www.instagram.com/lewiscampbellx/" target="_blank"> <img src={instagram} alt=""/> </a>
+      </div>
+      <div className={styles.smItem}>
+        <a href="https://twitter.com/lewiscampbellx" target="_blank"> <img src={twitter} alt=""/> </a>
+      </div>
     </div>
   </footer>
 )
