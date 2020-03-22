@@ -13,22 +13,16 @@ class RootIndex extends React.Component {
     const posts = get(this, 'props.data.allContentfulBlogPost.edges')
     const [author] = get(this, 'props.data.allContentfulPerson.edges')
 
-    return (
+    return ( 
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
           <Helmet title={siteTitle} />
           <Hero data={author.node} />
           <div className="wrapper">
-            <h2 className="section-headline">Most Recent</h2>
-            <ul className="article-list">
-              {posts.map(({ node }) => {
-                return (
-                  <li key={node.slug}>
-                    <ArticlePreview article={node} />
-                  </li>
-                )
-              })}
-            </ul>
+            <div className={styles.about}>
+              <h2>About</h2>
+              <p>lewsthoughts is a simple blog based on the weird and wonderful ideas and thoughts I regularly have spinning around in my head. It is an insight into how I think, feel and believe with the aim to inform and entertain readers around the topics of philosophy, life in general and all kinds of crazy stuff that I think about.</p>
+            </div>
           </div>
         </div>
       </Layout>
