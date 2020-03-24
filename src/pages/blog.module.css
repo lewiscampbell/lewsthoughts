@@ -4,7 +4,9 @@
   align-items: center;
   height: 61.8vh;
   max-height: 400px;
-  background: #e1e1e1;
+  background-image: url(../../static/blog\ photo\ 1.png);
+  background-size: cover;
+  background-position: center;
   font-size: 2em;
   overflow: hidden;
 }
