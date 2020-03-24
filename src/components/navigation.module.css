@@ -36,6 +36,11 @@ header {
   color: currentColor;
 }
 
+.navigationItem a:hover {
+  color: grey;
+}
+
 .link {
   text-decoration: none;
 }
+
