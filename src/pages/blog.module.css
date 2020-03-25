@@ -14,3 +14,9 @@
   margin: 5vh 22vh 5vh 22vh;
   text-align: center;
 }
+
+@media(max-width: 600px) {
+  .about {
+    margin: 5vh 5vh 5vh 5vh;
+  }
+}
