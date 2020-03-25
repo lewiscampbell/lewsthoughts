@@ -1,3 +1,7 @@
+.preview {
+  max-width: 400px;
+}
+
 .previewTitle {
   font-size: 1.5em;
 }
@@ -13,13 +17,6 @@
   margin-right: .5em;
 }
 
-.heroImage {
-  /*
-    Ensure golden ratio for the hero size while limiting it to some extend to
-    the viewport width
-  */
-  height: 100%;
-  width: auto;
-  max-height: 400px;
-  object-fit: cover;
+.image {
+
 }
