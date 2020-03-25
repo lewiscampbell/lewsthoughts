@@ -11,6 +11,7 @@
     the viewport width
   */
   height: 100%;
+  width: auto;
   max-height: 400px;
 }
 
