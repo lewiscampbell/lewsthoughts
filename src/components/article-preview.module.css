@@ -12,3 +12,14 @@
   border: 1px solid #A0A0A0;
   margin-right: .5em;
 }
+
+.heroImage {
+  /*
+    Ensure golden ratio for the hero size while limiting it to some extend to
+    the viewport width
+  */
+  height: 100%;
+  width: auto;
+  max-height: 400px;
+  object-fit: cover;
+}
