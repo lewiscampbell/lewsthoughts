@@ -1,4 +1,16 @@
-.hero {
+.heroIndex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 61.8vh;
+  max-height: 400px;
+  background-image: url(../../static/lew-in-hall.jpg);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.heroBlog {
   display: flex;
   justify-content: center;
   align-items: center;
