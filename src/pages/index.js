@@ -35,7 +35,7 @@ export const pageQuery = graphql`
   query HomeQuery {
     site {
       siteMetadata {
-        title
+        title: 'lewsthoughts',
       }
     }
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
