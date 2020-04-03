@@ -20,7 +20,7 @@ class RootIndex extends React.Component {
           <div className="wrapper">
             <div className={styles.about}>
               <h2>About</h2>
-              <p>lewsthoughts is a simple blog based on the weird and wonderful ideas and thoughts I regularly have spinning around in my head. It is an insight into how I think, feel and believe with the aim to inform and entertain readers around the topics of philosophy, life in general and all kinds of crazy stuff that I think about.</p>
+              <p>lewsthoughts is a blog based on the weird and wonderful ideas and thoughts I regularly have spinning around in my head. It's an insight into how I think, feel and believe with the aim to inform and entertain readers around the topics of philosophy, life in general and all kinds of crazy stuff that I think about.</p>
             </div>
           </div>
         </div>
