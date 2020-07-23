@@ -11,7 +11,7 @@ export default () => (
         <a href="https://www.instagram.com/lews_thoughts/" target="_blank"> <img src={instagram} alt=""/> </a>
       </div>
       <div className={styles.smItem}>
-        <a href="https://twitter.com/lews_thoughts" target="_blank"> <img src={twitter} alt=""/> </a>
+        <a href="https://twitter.com/lewiscampbellx" target="_blank"> <img src={twitter} alt=""/> </a>
       </div>
     </div>
   </footer>

@@ -4,7 +4,7 @@ import styles from './navigation.module.css'
 
 export default () => (
   <header>
-    <h1 class="title">lewsthoughts</h1>
+    <h1 class="title">Lew's Thoughts</h1>
     <nav role="navigation">
       <ul className={styles.navigation}>
         <li className={styles.navigationItem}>
