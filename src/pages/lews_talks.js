@@ -7,7 +7,6 @@ export default () => (
         <div style={{ background: '#fff' }}>
             <div className={styles.heroBlog}></div>
             <div className="wrapper">
-            <br></br>
                 <h2 className="section-headline">Episodes Coming Soon</h2>
                 <ul className="article-list">
 
