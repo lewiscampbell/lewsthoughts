@@ -1,0 +1,46 @@
+---
+import { getBlogPosts } from '../../lib/contentful';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PhotoHero from '../../components/PhotoHero.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+
+const posts = await getBlogPosts();
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+---
+
+<BaseLayout title="Blog" description="Articles on philosophy, life, tips, and more.">
+  <Header />
+  <PhotoHero
+    src="/images/lew-in-garden.jpg"
+    alt="Lew in a garden"
+    label="Photo of Lew in a garden"
+  />
+  <main>
+    <section>
+      <h2 class="article-grid__heading">Articles</h2>
+      <div class="article-grid">
+        {posts.map((post) => (
+          <BlogPostCard
+            title={post.title}
+            slug={post.slug}
+            tag={post.tags[0] ?? 'general'}
+            image={post.heroImageUrl!}
+            alt={post.heroImageAlt}
+            date={formatDate(post.publishDate)}
+            description={post.description}
+          />
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

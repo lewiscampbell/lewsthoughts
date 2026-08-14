@@ -1,0 +1,19 @@
+{
+  "name": "lewsthoughts",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.7.0",
+    "contentful": "^11.12.9",
+    "marked": "^18.0.9"
+  },
+  "devDependencies": {
+    "@types/marked": "^5.0.2"
+  }
+}

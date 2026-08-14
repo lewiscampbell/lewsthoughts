@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PhotoHero from '../components/PhotoHero.astro';
+---
+
+<BaseLayout title="Home">
+  <Header />
+  <PhotoHero />
+
+  <main>
+
+    <section class="section page-narrow">
+      <h2 class="section__title">About</h2>
+      <p class="about-text">
+        lewsthoughts is a blog based on the weird and wonderful ideas and thoughts I regularly have
+        spinning around in my head. It's an insight into how I think, feel and believe with the aim
+        to inform and entertain readers around the topics of philosophy, life in general and all
+        kinds of crazy stuff that I think about.
+      </p>
+    </section>
+    
+  </main>
+  <Footer />
+</BaseLayout>

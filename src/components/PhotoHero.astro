@@ -1,0 +1,17 @@
+---
+interface Props {
+  src?: string;
+  alt?: string;
+  label?: string;
+}
+
+const {
+  src = '/images/lew-in-hall.jpg',
+  alt = 'Lew standing in a hallway',
+  label = 'Photo of Lew',
+} = Astro.props;
+---
+
+<section class="photo-hero" aria-label={label}>
+  <img src={src} alt={alt} loading="eager" decoding="async" />
+</section>
