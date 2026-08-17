@@ -1,0 +1,48 @@
+---
+import { getBlogPosts } from '../../lib/contentful';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = await getBlogPosts();
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+---
+
+<BaseLayout title="Articles" description="Longer pieces, written down more fully.">
+  <main class="page">
+    <p class="page-kicker">writing</p>
+    <h1 class="page-title">Articles</h1>
+    <p class="page-lede">The things that made it out of my head in one piece.</p>
+
+    {posts.length === 0 ? (
+      <p class="empty-note">Nothing here yet.</p>
+    ) : (
+      <ul class="note-list">
+        {posts.map((post) => (
+          <li>
+            <a class="note-list__item" href={`/articles/${post.slug}/`}>
+              {post.heroImageUrl && (
+                <img
+                  class="note-list__image"
+                  src={post.heroImageUrl}
+                  alt={post.heroImageAlt ?? post.title}
+                  loading="lazy"
+                />
+              )}
+              <div class="note-list__copy">
+                <span class="note-list__title">{post.title}</span>
+                <p class="note-date">{formatDate(post.publishDate)}</p>
+                <p class="note-list__excerpt">{post.description}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</BaseLayout>

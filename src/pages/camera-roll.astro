@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const photos = [
+  {
+    src: '/images/lew-in-hall.jpg',
+    alt: 'Lew standing in a hallway',
+    caption: 'the hallway',
+  },
+  {
+    src: '/images/lew-in-garden.jpg',
+    alt: 'Lew in a garden',
+    caption: 'the garden',
+  },
+];
+---
+
+<BaseLayout title="Camera roll" description="Pictures, in no particular order.">
+  <main class="page">
+    <p class="page-kicker">pictures</p>
+    <h1 class="page-title">Camera roll</h1>
+    <p class="page-lede">A few photos, for now. More will land here over time.</p>
+
+    <div class="camera-grid">
+      {photos.map((photo) => (
+        <figure class="camera-card">
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+          <figcaption>{photo.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

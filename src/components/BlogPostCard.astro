@@ -13,7 +13,7 @@ const { title, slug, tag, image, alt, date, description } = Astro.props;
 ---
 
 <article class="article-card">
-  <a href={`/blog/${slug}/`} class="article-card__link">
+  <a href={`/articles/${slug}/`} class="article-card__link">
     <div class="article-card__image">
       <img src={image} alt={alt ?? title} loading="lazy" decoding="async" />
     </div>

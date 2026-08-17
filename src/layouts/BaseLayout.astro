@@ -1,10 +1,12 @@
 ---
+import Sidebar from '../components/Sidebar.astro';
+
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Weird and wonderful ideas on philosophy, life, and everything in between." } = Astro.props;
+const { title, description = "A personal notebook of thoughts, articles, and pictures." } = Astro.props;
 const fullTitle = title === "Home" ? "lewsthoughts" : `${title} · lewsthoughts`;
 ---
 
@@ -18,7 +20,12 @@ const fullTitle = title === "Home" ? "lewsthoughts" : `${title} · lewsthoughts`
     <title>{fullTitle}</title>
   </head>
   <body>
-    <slot />
+    <div class="site-shell">
+      <Sidebar />
+      <div class="site-content">
+        <slot />
+      </div>
+    </div>
   </body>
 </html>
 

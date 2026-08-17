@@ -1,30 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import PhotoHero from '../components/PhotoHero.astro';
 ---
 
 <BaseLayout title="Home">
-  <Header />
-  <PhotoHero />
+  <section class="cover-hero" aria-label="Photo of Lew">
+    <img src="/images/lew-in-hall.jpg" alt="Lew standing in a hallway" />
+  </section>
 
-  <main>
-
-    <section class="about-section">
-      <div class="about-section__content">
-        <p class="about-text">
-          lewsthoughts is basically a bit of an insight into some of the stuff that I think about. Some ideas are more fleshed out than others.
-        </p>
-        <p class="about-text">
-          I don’t really see myself as much of a writer, but I like to write my thoughts down to help me figure them out and explore them more…
-        </p>
-        <p class="about-text">
-          ... and sometimes they turn into blog posts.
-        </p>
-      </div>
+  <main class="page">
+    <section class="home-intro">
+      <p>
+        lewsthoughts is basically a bit of an insight into some of the stuff that I think about. Some ideas are more fleshed out than others.
+      </p>
+      <p>
+        I don’t really see myself as much of a writer, but I like to write my thoughts down to help me figure them out and explore them more…
+      </p>
+      <p>
+        ... and sometimes they turn into articles.
+      </p>
     </section>
-    
   </main>
-  <Footer />
 </BaseLayout>
