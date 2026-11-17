@@ -28,8 +28,6 @@ function formatDate(date: Date) {
 <BaseLayout title={post.title} description={post.description}>
   <main class="page">
     <article class="page-narrow">
-      <a href="/articles/" class="back-link">&larr; all articles</a>
-
       {post.heroImageUrl && (
         <figure class="article-hero">
           <img src={post.heroImageUrl} alt={post.heroImageAlt ?? post.title} />
@@ -40,9 +38,6 @@ function formatDate(date: Date) {
         <h1>{post.title}</h1>
         <p class="article-header__meta">
           {formatDate(post.publishDate)}
-          {post.tags[0] && (
-            <span class="tag" style="margin-left: 0.75rem; vertical-align: middle;">{post.tags[0]}</span>
-          )}
         </p>
       </header>
 

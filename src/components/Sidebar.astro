@@ -1,43 +1,81 @@
 ---
-const currentPath = Astro.url.pathname;
+import { getBlogPosts } from '../lib/contentful';
 
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/articles/', label: 'Articles' },
-  { href: '/thoughts/', label: 'Thoughts' },
-  { href: '/camera-roll/', label: 'Camera roll' },
-];
+const posts = await getBlogPosts();
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const articlesOpen = currentPath.startsWith('/articles/');
 
-function normalize(path: string) {
-  if (path === '/') return '/';
-  return path.replace(/\/+$/, '');
+function isHome() {
+  return currentPath === '/';
 }
 
-function isCurrent(href: string) {
-  const current = normalize(currentPath);
-  const target = normalize(href);
-  if (target === '/') return current === '/';
-  return current === target || current.startsWith(`${target}/`);
+function isArticle(slug: string) {
+  return currentPath === `/articles/${slug}`;
 }
 ---
 
 <aside class="sidebar">
   <div class="sidebar__top">
     <a href="/" class="site-logo">lewsthoughts</a>
-    <p class="sidebar__tag">a personal notebook</p>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      aria-label="Open menu"
+    >
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
   </div>
 
+  <div id="site-menu" class="sidebar__menu">
   <nav aria-label="Main">
     <ul class="site-nav">
-      {links.map(({ href, label }) => (
-        <li>
-          <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
-            {label}
-          </a>
-        </li>
-      ))}
+      <li>
+        <a href="/" aria-current={isHome() ? 'page' : undefined}>Home</a>
+      </li>
+      <li>
+        <button
+          class="articles-toggle"
+          type="button"
+          aria-expanded={articlesOpen ? 'true' : 'false'}
+          aria-controls="article-list"
+        >
+          Articles
+          <svg class="articles-toggle__icon" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2.2 4.3 6 8.1 9.8 4.3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </li>
+    </ul>
+
+    <ul id="article-list" class="article-menu" hidden={!articlesOpen}>
+      {posts.length === 0 ? (
+        <li class="article-menu__empty">Nothing here yet.</li>
+      ) : (
+        posts.map((post) => (
+          <li>
+            <a
+              href={`/articles/${post.slug}/`}
+              aria-current={isArticle(post.slug) ? 'page' : undefined}
+              data-description={post.description}
+              data-image={post.heroImageUrl}
+              data-image-alt={post.heroImageAlt ?? post.title}
+            >
+              {post.title}
+            </a>
+          </li>
+        ))
+      )}
     </ul>
   </nav>
+
+  <div class="article-preview" hidden role="tooltip">
+    <img alt="" />
+    <p></p>
+  </div>
 
   <ul class="sidebar__socials">
     <li>
@@ -61,5 +99,93 @@ function isCurrent(href: string) {
         </svg>
       </a>
     </li>
-  </ul>
+    </ul>
+  </div>
 </aside>
+
+<script>
+  const navToggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+
+  navToggle?.addEventListener('click', () => {
+    const menu = document.querySelector('#site-menu');
+    const bar = document.querySelector<HTMLElement>('.sidebar__top');
+    const open = navToggle.getAttribute('aria-expanded') === 'true';
+    const nextOpen = !open;
+    if (bar) {
+      document.documentElement.style.setProperty('--phone-bar-height', `${bar.offsetHeight}px`);
+    }
+    navToggle.setAttribute('aria-expanded', String(nextOpen));
+    navToggle.setAttribute('aria-label', nextOpen ? 'Close menu' : 'Open menu');
+    menu?.classList.toggle('is-open', nextOpen);
+    document.body.classList.toggle('nav-open', nextOpen);
+  });
+
+  const toggle = document.querySelector<HTMLButtonElement>('.articles-toggle');
+  const list = document.querySelector<HTMLElement>('#article-list');
+  const preview = document.querySelector<HTMLElement>('.article-preview');
+  const previewImage = preview?.querySelector('img');
+  const previewText = preview?.querySelector('p');
+
+  toggle?.addEventListener('click', () => {
+    if (!list || !preview) return;
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    list.hidden = open;
+    if (open) preview.hidden = true;
+  });
+
+  let hideTimer = 0;
+
+  function hidePreviewSoon(event?: Event) {
+    const next = event instanceof MouseEvent ? event.relatedTarget : null;
+    if (next instanceof Node && preview?.contains(next)) return;
+    window.clearTimeout(hideTimer);
+    hideTimer = window.setTimeout(() => {
+      if (preview) preview.hidden = true;
+    }, 160);
+  }
+
+  function showPreview(link: HTMLAnchorElement) {
+    if (!preview || !previewImage || !previewText || list?.hidden) return;
+    window.clearTimeout(hideTimer);
+
+    const image = link.dataset.image;
+    const description = link.dataset.description ?? '';
+    if (image) {
+      previewImage.src = image;
+      previewImage.alt = link.dataset.imageAlt ?? '';
+      previewImage.hidden = false;
+    } else {
+      previewImage.hidden = true;
+      previewImage.removeAttribute('src');
+    }
+    previewText.textContent = description;
+    preview.hidden = false;
+
+    const rect = link.getBoundingClientRect();
+    const sidebarRight = link.closest('.sidebar')?.getBoundingClientRect().right ?? rect.right;
+    const width = preview.offsetWidth;
+    const height = preview.offsetHeight;
+    let left = sidebarRight + 12;
+    let top = rect.top + rect.height / 2 - height / 2;
+
+    if (left + width > window.innerWidth - 12) {
+      left = Math.max(12, window.innerWidth - width - 12);
+      top = rect.bottom + 10;
+    }
+
+    top = Math.max(12, Math.min(top, window.innerHeight - height - 12));
+    preview.style.left = `${left}px`;
+    preview.style.top = `${top}px`;
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('.article-menu a').forEach((link) => {
+    link.addEventListener('mouseenter', () => showPreview(link));
+    link.addEventListener('focus', () => showPreview(link));
+    link.addEventListener('mouseleave', hidePreviewSoon);
+    link.addEventListener('blur', () => hidePreviewSoon());
+  });
+
+  preview?.addEventListener('mouseenter', () => window.clearTimeout(hideTimer));
+  preview?.addEventListener('mouseleave', hidePreviewSoon);
+</script>
