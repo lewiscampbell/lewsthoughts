@@ -135,6 +135,7 @@ function isArticle(slug: string) {
   });
 
   let hideTimer = 0;
+  const phoneLayout = window.matchMedia('(max-width: 800px)');
 
   function hidePreviewSoon(event?: Event) {
     const next = event instanceof MouseEvent ? event.relatedTarget : null;
@@ -146,7 +147,7 @@ function isArticle(slug: string) {
   }
 
   function showPreview(link: HTMLAnchorElement) {
-    if (!preview || !previewImage || !previewText || list?.hidden) return;
+    if (phoneLayout.matches || !preview || !previewImage || !previewText || list?.hidden) return;
     window.clearTimeout(hideTimer);
 
     const image = link.dataset.image;
@@ -188,4 +189,7 @@ function isArticle(slug: string) {
 
   preview?.addEventListener('mouseenter', () => window.clearTimeout(hideTimer));
   preview?.addEventListener('mouseleave', hidePreviewSoon);
+  phoneLayout.addEventListener('change', () => {
+    if (phoneLayout.matches && preview) preview.hidden = true;
+  });
 </script>
