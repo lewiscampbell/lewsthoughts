@@ -18,6 +18,17 @@ const fullTitle = title === "Home" ? "lewsthoughts" : `${title} · lewsthoughts`
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{fullTitle}</title>
+    {import.meta.env.PROD && (
+      <>
+        <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0T2YJ4K9R0"></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-0T2YJ4K9R0');
+        </script>
+      </>
+    )}
   </head>
   <body>
     <div class="site-shell">
